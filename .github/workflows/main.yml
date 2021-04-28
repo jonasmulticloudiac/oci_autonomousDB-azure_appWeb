@@ -1,73 +1,74 @@
-name: terraform-CI
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy Terraform-Oci
 
 on:
   workflow_dispatch:
 
+
 jobs:
-  build:
 
+  build:    
     runs-on: ubuntu-latest
-
-    steps:    
+    
+    steps:
       - uses: actions/checkout@v2
       
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: terraform
+      - name:  Upload Artifact 
+        uses: actions/upload-artifact@v1 
+        with: 
+          name: terraform 
           path: ${{ github.workspace }}
-          
 
-  deploy-dbweb:
-    name: Deploy DB-WEB
+  deploy-dev-infra: 
+    name: Deploy Infra Dev
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
+    defaults: 
+      run: 
         working-directory: ${{ github.workspace }}
 
     env:
-      TF_VAR_user_ocid: ${{ secrets.OCI_USER_OCID }}
-      TF_VAR_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
-      TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY_OCID }}
-      TF_VAR_compartment_ocid: ${{ secrets.TF_VAR_compartment_ocid }}
-      TF_VAR_region: ${{ secrets.OCI_REGION }}
-      TF_VAR_private_key:  ${{ secrets.OCI_KEY_FILE }}      
-      TF_VAR_public_key_path:  ${{ secrets.TF_VAR_public_key_path }}
-      TF_VAR_tf_state:  ${{ secrets.TF_VAR_tf_state }}        
-      verbose: true 
-      
-      
-    environment:
-      name: dev
+      ARM_CLIENT_ID:        ${{ secrets.TF_ARM_CLIENT_ID  }}
+      ARM_SUBSCRIPTION_ID:  ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID:        ${{ secrets.TF_ARM_TENANT_ID }}
+      ARM_CLIENT_SECRET:    ${{ secrets.TF_ARM_CLIENT_SECRET }}
     
-    needs: build
+    environment:
+      name: dev 
+
+    needs: build 
     steps:
-      - name: Download Terraform
+      - name: Download Terraform 
         uses: actions/download-artifact@v2
-        with:
+        with: 
           name: terraform
           path: ${{ github.workspace }}
-          
+
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_wrapper: false
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-
+   
       - name: Terraform Init
         id: init
         run: terraform init
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate -no-color 
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color 
+        run: terraform plan  -var 'prefix=${{ secrets.RESOURCE_PREFIX }}' -var 'region=${{ secrets.REGION }}'
         continue-on-error: true
-  
+
       - name: Terraform Apply
-        run: terraform apply -auto-approve 
-      
+        id: apply
+        run: terraform apply  -var 'prefix=${{ secrets.RESOURCE_PREFIX }}' -var 'region=${{ secrets.REGION }}' -auto-approve
+
+      - name: Terraform Output
+        id: saida
+        run: terraform output  
+
