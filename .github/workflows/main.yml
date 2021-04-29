@@ -78,7 +78,8 @@ jobs:
 
       - name:  RotinaScript
         run: | 
-          unzip -d app_projetorh/wallet/ wallet_tcb/wallte.zip 
+          pwd
+          unzip -d app_projetorh/wallet/ wallet_tcb/wallet.zip
           ls -la  app_projetorh/wallet/ 
 
   
