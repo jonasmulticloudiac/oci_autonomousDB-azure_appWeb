@@ -66,14 +66,14 @@ jobs:
         run: terraform init
 
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan  
+      - name: Terraform OCI Plan
+        id: oci-plan
+        run: terraform plan -target=module.atp -out=oci.plan 
         continue-on-error: true
 
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply  -auto-approve
+      - name: Terraform OCI Apply
+        id: oci-apply
+        run: terraform apply oci.plan  -auto-approve
 
       - name:  RotinaScript
         run: | 
@@ -98,7 +98,14 @@ jobs:
         run: | 
           docker push jonasmulticloudiac/ocicadastro_rh_projfinal
 
+      - name: Terraform Azure Plan
+        id: az-plan
+        run: terraform plan -target=module.azure-cloud -out=azure.plan 
+        continue-on-error: true
 
+      - name: Terraform Azure Apply
+        id: az-apply
+        run: terraform apply azure.plan  -auto-approve
 
           
 
