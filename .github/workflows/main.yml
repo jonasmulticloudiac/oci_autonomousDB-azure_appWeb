@@ -78,9 +78,11 @@ jobs:
 
       - name:  Rotina Script
         run: | 
+          pwd 
           ls -la
-          
-        
+          ls -la wallet_tcb
+
+  
 
 
 
