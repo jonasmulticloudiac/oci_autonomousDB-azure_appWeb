@@ -1,6 +1,6 @@
 # Local .terraform directories
 **/.terraform/*
-
+*sqlplus.txt
 # .tfstate files
 *.tfstate
 *.tfstate.*
