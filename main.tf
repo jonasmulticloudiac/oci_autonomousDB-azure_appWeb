@@ -1,4 +1,3 @@
-
 module "atp" {
   
   source = "./module.atp"
@@ -13,6 +12,7 @@ module "atp" {
   atpdatabase_license_model             =  var.atpdatabase_license_model
   compartment_ocid_projetofinal         =  var.compartment_ocid_projetofinal
   atp_password                          =  var.atp_password
+  wallet_zip_file                       =  var.wallet_zip_file
 
 }
 
