@@ -16,6 +16,7 @@ module "atp" {
 
 }
 
+/*
 module "azure-cloud" {
  
   source = "./module.azure"
@@ -26,3 +27,4 @@ module "azure-cloud" {
   app_service_name             = var.app_service_name
 
 }
+*/
