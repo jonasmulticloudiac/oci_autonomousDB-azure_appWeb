@@ -84,7 +84,7 @@ jobs:
       
       - name: DockerBuild - Rh
         run: | 
-          docker build ./app_projetorh/ -t jonasmulticloudiac/ocicadastro_rh_projfinal . 
+          docker build ./app_projetorh -t jonasmulticloudiac/ocicadastro_rh_projfinal 
           docker image ls 
 
 
