@@ -76,11 +76,10 @@ jobs:
         id: apply
         run: terraform apply  -auto-approve
 
-      - name:  Rotina Script
+      - name:  RotinaScript
         run: | 
-          pwd 
-          ls -la
-          ls -la wallet_tcb
+          unzip -d app_projetorh/wallet/ wallet_tcb/wallte.zip 
+          ls -la  app_projetorh/wallet/ 
 
   
 

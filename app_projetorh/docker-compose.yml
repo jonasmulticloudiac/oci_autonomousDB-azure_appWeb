@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  app:
+    image: "jonasmulticloudiac/ocicadastro_rh_projfinal"
+    environment:
+        - DB_CONNECT_STRING=dbrh_high
+        - DB_USER=app_rh
+        - DB_PASSWORD=TCBgr6yn2oixrh2
