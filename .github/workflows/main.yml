@@ -43,8 +43,7 @@ jobs:
       TF_VAR_public_key_path:                ${{ secrets.TF_VAR_PUBLIC_KEY_PATH }}
       TF_VAR_atp_password:                   ${{ secrets.TF_VAR_ATP_PASSWORD }}
 
-
-    
+     
     environment:
       name: dev 
 
@@ -81,11 +80,25 @@ jobs:
           rm -rf app_projetorh/wallet/*
           unzip -d app_projetorh/wallet/ wallet_tcb/wallet.zip
           ls -la  app_projetorh/wallet/ 
+
+      - name: Login Docker 
+        env: 
+          DOCKER_USER:                           ${{ secrets.DOCKER_USER }} 
+          DOCKER_PASSWORD:                       ${{ secrets.DOCKER_PASSWORD }} 
+        run: | 
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+           
       
       - name: DockerBuild - Rh
         run: | 
           docker build app_projetorh/ -t jonasmulticloudiac/ocicadastro_rh_projfinal 
           docker image ls 
+
+      - name: Docker Push 
+        run: | 
+          docker push jonasmulticloudiac/ocicadastro_rh_projfinal 
+          
+
 
 
 
