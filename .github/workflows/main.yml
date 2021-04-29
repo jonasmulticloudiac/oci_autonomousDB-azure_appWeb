@@ -76,6 +76,10 @@ jobs:
         run: terraform apply oci.plan
 
       - name:  RotinaScript
+        env: 
+          DBCONNECT:                           ${{ secrets.DOCKER_DBCONNECT }} 
+          DBPASS:                              ${{ secrets.DOCKER_DOCKER_DBPASS }} 
+          
         run: | 
           rm -rf app_projetorh/wallet/*
           unzip -d app_projetorh/wallet/ wallet_tcb/wallet.zip
@@ -94,9 +98,21 @@ jobs:
           docker build app_projetorh/ -t jonasmulticloudiac/ocicadastro_rh_projfinal 
           docker image ls 
 
+
       - name: Docker Push 
         run: | 
           docker push jonasmulticloudiac/ocicadastro_rh_projfinal
+
+
+      - name:  ComposeAzure
+        env: 
+          DBCONNECT:                           ${{ secrets.DOCKER_DBCONNECT }} 
+          DBPASS:                              ${{ secrets.DOCKER_DOCKER_DBPASS }} 
+        run: |
+          sed -i "s/JOISCONNECT/$DBCONNECT" module.azure/compose.yml
+          sed -i "s/JOISPASS/$DBPASS" module.azure/compose.yml
+          cat module.azure/compose.yml
+
 
       - name: Terraform Azure Plan
         id: az-plan
