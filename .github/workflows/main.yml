@@ -26,13 +26,24 @@ jobs:
 
     defaults: 
       run: 
-        working-directory: ${{ github.workspace }}
+        working-directory:    ${{ github.workspace }}
 
     env:
-      ARM_CLIENT_ID:        ${{ secrets.TF_ARM_CLIENT_ID  }}
-      ARM_SUBSCRIPTION_ID:  ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID:        ${{ secrets.TF_ARM_TENANT_ID }}
-      ARM_CLIENT_SECRET:    ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_CLIENT_ID:          ${{ secrets.TF_ARM_CLIENT_ID  }}
+      ARM_SUBSCRIPTION_ID:    ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID:          ${{ secrets.TF_ARM_TENANT_ID }}
+      ARM_CLIENT_SECRET:      ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      
+      TF_VAR_user_ocid:        ${{ secrets.TF_VAR_USER_OCID }}
+      TF_VAR_fingerprint:      ${{ secrets.TF_VAR_FINGERPRINT }}
+      TF_VAR_tenancy_ocid:     ${{ secrets.TF_VAR_TENANCY_OCID }}
+      TF_VAR_compartment_ocid: ${{ secrets.TF_VAR_COMPARTMENT_OCID_PROJETOFINAL }}
+      TF_VAR_region:           ${{ secrets.TF_VAR_REGION }}
+      TF_VAR_private_key:      ${{ secrets.TF_VAR_PRIVATE_KEY_PATH }}      
+      TF_VAR_public_key_path:  ${{ secrets.TF_VAR_PUBLIC_KEY_PATH }}
+      TF_VAR_ATP_PASSWORD:       ${{ secrets.TF_VAR_ATP_PASSWORD }}
+
+
     
     environment:
       name: dev 
@@ -61,12 +72,12 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan  -var 'prefix=${{ secrets.RESOURCE_PREFIX }}' -var 'region=${{ secrets.REGION }}'
+        run: terraform plan  
         continue-on-error: true
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply  -var 'prefix=${{ secrets.RESOURCE_PREFIX }}' -var 'region=${{ secrets.REGION }}' -auto-approve
+        run: terraform apply 
 
       - name: Terraform Output
         id: saida
