@@ -109,8 +109,8 @@ jobs:
           DBCONNECT:                           ${{ secrets.DOCKER_DBCONNECT }} 
           DBPASS:                              ${{ secrets.DOCKER_DOCKER_DBPASS }} 
         run: |
-          sed -i "s/JOISCONNECT/$DBCONNECT" module.azure/compose.yml
-          sed -i "s/JOISPASS/$DBPASS" module.azure/compose.yml
+          sed -i "s/JOISCONNECT/$DBCONNECT/g" module.azure/compose.yml
+          sed -i "s/JOISPASS/$DBPASS/g" module.azure/compose.yml
           cat module.azure/compose.yml
 
 
