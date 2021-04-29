@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Deploy Terraform-Oci
 
 on:
@@ -109,8 +107,8 @@ jobs:
           DBCONNECT:                           ${{ secrets.DOCKER_DBCONNECT }} 
           DBPASS:                              ${{ secrets.DOCKER_DBPASS }} 
         run: |
-          sed -i "s/JOISCONNECT/$DBCONNECT/g" module.azure/compose.yml
-          sed -i "s/JOISPASS/$DBPASS/g" module.azure/compose.yml
+          #sed -i "s/JOISCONNECT/$DBCONNECT/g" module.azure/compose.yml
+          #sed -i "s/JOISPASS/$DBPASS/g" module.azure/compose.yml
           cat module.azure/compose.yml
 
 
