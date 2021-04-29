@@ -73,7 +73,7 @@ jobs:
 
       - name: Terraform OCI Apply
         id: oci-apply
-        run: terraform apply oci.plan  -auto-approve
+        run: terraform apply oci.plan
 
       - name:  RotinaScript
         run: | 
@@ -105,7 +105,7 @@ jobs:
 
       - name: Terraform Azure Apply
         id: az-apply
-        run: terraform apply azure.plan  -auto-approve
+        run: terraform apply azure.plan
 
           
 
