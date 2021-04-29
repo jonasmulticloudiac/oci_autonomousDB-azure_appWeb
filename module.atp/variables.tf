@@ -16,4 +16,7 @@ variable "atpdatabase_license_model" {}
 variable "atpdatabase_db_version" {}
 
 variable "compartment_ocid_projetofinal" {}
+
 variable "atp_password" {}
+
+variable "wallet_zip_file" {}

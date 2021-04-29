@@ -1,5 +1,6 @@
 output "wp" {
-  value = [random_string.wallet_password.result]
+  #value = [random_string.wallet_password.result]
+  value =  var.atp_password
 }
 
 output "adminpass" {

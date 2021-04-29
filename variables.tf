@@ -6,6 +6,10 @@ variable "region" {}
 variable "compartment_ocid_projetofinal" {}
 variable "atp_password" {}
 
+variable "wallet_zip_file" {
+  default = "wallet_tcb/wallet.zip"
+}
+
 variable "atpdatabase_cpu_core_count" {
   default = 1
 }
