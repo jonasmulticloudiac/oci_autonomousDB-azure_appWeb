@@ -96,7 +96,10 @@ jobs:
 
       - name: Docker Push 
         run: | 
-          docker push jonasmulticloudiac/ocicadastro_rh_projfinal 
+          docker push jonasmulticloudiac/ocicadastro_rh_projfinal
+
+
+
           
 
 

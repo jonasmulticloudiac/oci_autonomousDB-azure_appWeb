@@ -45,8 +45,8 @@ variable "atpdatabase_db_version" {
 }
 
 
-
 ## Variables azure
+
 variable "resource_group_name"        { default = "rgtcb" }
 variable "resource_group_location"    { default = "eastus2" }
 variable "app_service_plan_name"      { default = "asp-tcbjonas-gestaorh" }
