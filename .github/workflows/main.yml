@@ -81,7 +81,14 @@ jobs:
           rm -rf app_projetorh/wallet/*
           unzip -d app_projetorh/wallet/ wallet_tcb/wallet.zip
           ls -la  app_projetorh/wallet/ 
-          docker --version
+      
+      - name: DockerBuild - Rh
+        run: | 
+          docker build ./app_projetorh/ -t jonasmulticloudiac/ocicadastro_rh_projfinal . 
+          docker image ls 
+
+
+
 
   
 
